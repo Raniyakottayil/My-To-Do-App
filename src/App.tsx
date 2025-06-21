@@ -26,30 +26,18 @@ function App() {
 	const [input, setInput] = useState<string>("");
 	const [todos, setTodos] = useState<Todos[]>(getInitialTodos);
 
-	const [editId, setEditId] = useState<number | null>(null);
-
 	const columns = ["To Do", "In Progress", "Done"];
 	const sensors = useSensors(useSensor(PointerSensor));
-     const addOrUpdateTodo = () => {
+	const addTodo = () => {
 		if (!input.trim()) return;
 
-		if (editId !== null) {
-			setTodos((prev) =>
-				prev.map((todo) =>
-					todo.id === editId ? { ...todo, text: input } : todo
-				)
-			);
-			setEditId(null);
-		} else {
-			const newTodo = {
-				id: Date.now(),
-				text: input,
-				completed: false,
-				column: "To Do",
-			};
-			setTodos((prev) => [...prev, newTodo]);
-		}
-
+		const newTodo = {
+			id: Date.now(),
+			text: input,
+			completed: false,
+			column: "To Do",
+		};
+		setTodos((prev) => [...prev, newTodo]);
 		setInput("");
 	};
 
@@ -61,12 +49,7 @@ function App() {
 
 	const deleteTodo = (id: number) => {
 		setTodos(todos.filter((todo) => todo.id !== id));
-		if (editId === id) {
-			setEditId(null);
-			setInput("");
-		}
 	};
-	
 
 	const handleDragEnd = (event: DragEndEvent) => {
 		const { active, over } = event;
@@ -127,9 +110,9 @@ function App() {
 					/>
 					<button
 						className=' p-2 flex-1 text-white bg-blue-700 cursor-pointer rounded-md hover:bg-blue-400 hover:text-black  transition'
-						onClick={addOrUpdateTodo}
+						onClick={addTodo}
 					>
-						{editId ? "Update" : "Add"}
+						Add
 					</button>
 				</div>
 			</div>

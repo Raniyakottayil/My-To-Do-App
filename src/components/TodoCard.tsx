@@ -38,8 +38,11 @@ const TodoCard = ({ todo, onEdit, deleteTodo }: TodoProp) => {
 			style={style}
 			className='flex justify-between items-center my-4 p-2 bg-white text-black rounded-md'
 		>
-			
-			<div {...attributes} {...listeners} className="cursor-move pr-2">
+			<div
+				{...attributes}
+				{...listeners}
+				className='cursor-move pr-2'
+			>
 				:::
 			</div>
 
