@@ -1,6 +1,8 @@
-import { FaEdit } from "react-icons/fa";
 import { useState } from "react";
+import { FaEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 type TodoProp = {
 	todo: {
@@ -12,16 +14,35 @@ type TodoProp = {
 	onEdit: (id: number, newText: string) => void;
 };
 const TodoCard = ({ todo, onEdit, deleteTodo }: TodoProp) => {
+	const { attributes, listeners, setNodeRef, transform, transition } =
+		useSortable({ id: todo.id });
+
 	const [editMode, setEditMode] = useState(false);
 	const [editText, setEditText] = useState(todo.text);
+
+	const style = {
+		transform: CSS.Transform.toString(transform),
+		transition,
+	};
+
 	const handleSave = () => {
 		if (editText.trim()) {
 			onEdit(todo.id, editText.trim());
 			setEditMode(false);
 		}
 	};
+
 	return (
-		<div className='flex justify-between items-center my-4 p-2 bg-white text-black rounded-md'>
+		<div
+			ref={setNodeRef}
+			style={style}
+			className='flex justify-between items-center my-4 p-2 bg-white text-black rounded-md'
+		>
+			
+			<div {...attributes} {...listeners} className="cursor-move pr-2">
+				:::
+			</div>
+
 			<div className='flex-1 flex items-center justify-between'>
 				{editMode ? (
 					<>
@@ -65,5 +86,4 @@ const TodoCard = ({ todo, onEdit, deleteTodo }: TodoProp) => {
 		</div>
 	);
 };
-
 export default TodoCard;
