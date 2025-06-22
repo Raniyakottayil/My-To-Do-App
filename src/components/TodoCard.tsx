@@ -48,19 +48,19 @@ const TodoCard = ({ todo, onEdit, deleteTodo }: TodoProp) => {
 
 			<div className='flex-1 flex items-center justify-between'>
 				{editMode ? (
-					<>
+					<div  className="flex flex-col sm:flex-row gap-2 w-full">
 						<input
 							value={editText}
 							onChange={(e) => setEditText(e.target.value)}
-							className='flex-grow mr-2 px-2 py-1 border rounded'
+							className='w-full px-3 py-2 border rounded sm:flex-grow'
 						/>
 						<button
 							onClick={handleSave}
-							className='bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-400'
+							className='w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-400 transition-colors'
 						>
 							Save
 						</button>
-					</>
+					</div>
 				) : (
 					<>
 						<p className='break-words max-w-[250px]'>{todo.text}</p>
