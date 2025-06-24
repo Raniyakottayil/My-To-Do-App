@@ -9,7 +9,9 @@ type Todo = {
 	id: number;
 	text: string;
 	completed: boolean;
-};
+}
+
+
 
 type TodoColumnProps = {
 	title: string;

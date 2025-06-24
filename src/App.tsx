@@ -17,6 +17,9 @@ type Todos = {
 	column: string;
 };
 
+
+
+
 function App() {
 	const getInitialTodos = (): Todos[] => {
 		const stored = localStorage.getItem("todos");
