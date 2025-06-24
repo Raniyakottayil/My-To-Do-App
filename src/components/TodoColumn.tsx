@@ -11,8 +11,6 @@ type Todo = {
 	completed: boolean;
 }
 
-
-
 type TodoColumnProps = {
 	title: string;
 	todos: Todo[];
